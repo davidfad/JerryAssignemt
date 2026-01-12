@@ -7,7 +7,12 @@ int main(int argc, char* argv[])
 {
     printf("Hello World \n");
 
-    if(argc > 1)
+    if(argc != 4)
+    {
+        printf("Usage: ./JerryAssignemt <numberOfPlanets> <numberOfJerries> <configurationFile>");
+        return 1;
+    }
+    else
     {
         printf("%s \n", argv[1]);
         printf("%s \n", argv[2]);
