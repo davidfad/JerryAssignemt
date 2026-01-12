@@ -3,3 +3,8 @@
 #include <string.h>
 #include "Jerry.h"
 
+int main()
+{
+    printf("Hello World");
+    return 0;
+}
