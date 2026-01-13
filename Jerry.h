@@ -3,6 +3,8 @@
 #include <string.h>
 #include <stdbool.h>
 #include "Defs.h"
+#ifndef JERRY_H
+#define JERRY_H
 
 /* Struct Definitions */
 
@@ -60,3 +62,4 @@ bool ifHasPhysicalCharacteristics(Jerry* jerry, PhysicalCharacteristics* pc); //
 status addPhysicalCharacteristics(Jerry* jerry, PhysicalCharacteristics* pc); // להוסיף תכונה פיזית לגרי
 status removePhysicalCharacteristics(Jerry* jerry, char* name); //  למחוק תכונה פיזית לגרי
 status printJerry(Jerry* jerry); // להדפיס את גרי
+#endif

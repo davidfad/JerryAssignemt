@@ -19,7 +19,7 @@ Plant* createPlant(char* name, double x, double y, double z)
         return NULL;
     }
 
-    plant->name = (char*)malloc(strlen(name));
+    plant->name = (char*)malloc(strlen(name)+1);
 
     if(plant->name == NULL)
     {   
@@ -28,7 +28,7 @@ Plant* createPlant(char* name, double x, double y, double z)
         return NULL;
     }
 
-    plant->name = name;
+    strcpy(plant->name, name);
     plant->x = x;
     plant->y = y;
     plant->z = z;
@@ -39,7 +39,7 @@ void destroyPlant(Plant* plant)
 {
     if(plant == NULL)
     {
-        return NULL;
+        return;
     }
     free(plant->name);
     free(plant);
@@ -68,7 +68,7 @@ Origin* createOrigin(char* dimansion, Plant* plant)
     {
         return NULL;
     }
-    origin->dimansion = (char*)malloc(strlen(dimansion));
+    origin->dimansion = (char*)malloc(strlen(dimansion)+1);
     if(origin->dimansion == NULL)
     {
         free(origin);
@@ -84,7 +84,7 @@ void destroyOrigin(Origin* origin)
 {
     if(origin == NULL)
     {
-        return NULL;
+        return;
     }
     free(origin->dimansion);
     free(origin);
@@ -103,7 +103,7 @@ PhysicalCharacteristics* createPhysicalCharacteristics(char* name, double value)
     {
         return NULL;
     }
-    pc->name = (char*)malloc(strlen(name));
+    pc->name = (char*)malloc(strlen(name)+1);
     if(pc->name)
     {
         free(pc);
@@ -119,7 +119,7 @@ void destroyPhysicalCharacteristics(PhysicalCharacteristics* physicalCharacteris
 {
     if(physicalCharacteristics == NULL)
     {
-        return NULL;
+        return;
     }
     printf("Physical Characteristic was destroyed!");
     free(physicalCharacteristics->name);
@@ -134,12 +134,12 @@ Jerry* createJerry(char* id, int happiness, Origin* origin)
     {
         return NULL;
     }
-    Jerry* jerry = (PhysicalCharacteristics*)malloc(sizeof(jerry));
+    Jerry* jerry = (Jerry*)malloc(sizeof(jerry));
     if(jerry == NULL)
     {
         return NULL;
     }
-    jerry->id = (char*)malloc(strlen(id));
+    jerry->id = (char*)malloc(strlen(id)+1);
     if(jerry->id == NULL)
     {
         return NULL;
@@ -155,7 +155,10 @@ Jerry* createJerry(char* id, int happiness, Origin* origin)
 }
 void destroyJerry(Jerry* jerry)
 {
-    if(jerry == NULL) return NULL;
+    if(jerry == NULL)
+    {
+        return;
+    }
     free(jerry->id);
     destroyOrigin(jerry->origin);
 
