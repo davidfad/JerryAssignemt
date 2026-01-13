@@ -14,7 +14,7 @@ typedef struct Plant // כוכב
     double z;
 } Plant;
 
-typedef struct Origin // מוצא
+typedef struct Origin // מוצא מימד
 {
     char* dimansion;
     Plant* plants;
@@ -48,15 +48,15 @@ void destroyOrigin(Origin* origin);
 
 /* Functions of PhysicalCharacteristics */ // תכונות פיזיות
 
-PhysicalCharacteristics* createPhysicalCharacteristics(char* name, double value);
-void destroyPhysicalCharacteristics(PhysicalCharacteristics* pc);
-
+PhysicalCharacteristics* createPhysicalCharacteristics(char* name, double value); // להוסיף תכונה פיזית בכללי
+void destroyPhysicalCharacteristics(PhysicalCharacteristics* pc); // למחוק תכונה פיזית
+ 
 /* Functions of Jerry */ // גרי
 
-Jerry* createJerry(char* id, int happiness, Origin* origin);
-void destroyJerry(Jerry* jerry);
+Jerry* createJerry(char* id, int happiness, Origin* origin); // ליצור גרי
+void destroyJerry(Jerry* jerry); // למחוק לגמריי גרי
 
-bool ifHasPhysicalCharacteristics(Jerry* jerry, PhysicalCharacteristics* pc);
-status addPhysicalCharacteristics(Jerry* jerry, PhysicalCharacteristics* pc);
-status removePhysicalCharacteristics(Jerry* jerry, char* name);
-status printJerry(Jerry* jerry);
+bool ifHasPhysicalCharacteristics(Jerry* jerry, PhysicalCharacteristics* pc); // לבדוק אם יש לגרי תכונה פיזית
+status addPhysicalCharacteristics(Jerry* jerry, PhysicalCharacteristics* pc); // להוסיף תכונה פיזית לגרי
+status removePhysicalCharacteristics(Jerry* jerry, char* name); //  למחוק תכונה פיזית לגרי
+status printJerry(Jerry* jerry); // להדפיס את גרי

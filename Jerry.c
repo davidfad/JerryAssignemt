@@ -8,7 +8,7 @@
 
 Plant* createPlant(char* name, double x, double y, double z)
 {
-    if(name == NULL) 
+    if(name == NULL)
     {
         return NULL;       
     }
@@ -18,6 +18,7 @@ Plant* createPlant(char* name, double x, double y, double z)
     {
         return NULL;
     }
+
     plant->name = (char*)malloc(strlen(name));
 
     if(plant->name == NULL)
@@ -116,7 +117,11 @@ PhysicalCharacteristics* createPhysicalCharacteristics(char* name, double value)
 }
 void destroyPhysicalCharacteristics(PhysicalCharacteristics* physicalCharacteristics)
 {
-    if(physicalCharacteristics == NULL) return NULL;
+    if(physicalCharacteristics == NULL)
+    {
+        return NULL;
+    }
+    printf("Physical Characteristic was destroyed!");
     free(physicalCharacteristics->name);
     free(physicalCharacteristics);
 }
@@ -145,7 +150,7 @@ Jerry* createJerry(char* id, int happiness, Origin* origin)
     jerry->origin = origin;
     jerry->physicalCharacteristics = NULL;
     jerry->numberOfCharacteristics = NULL;
-
+    printf("Jerry was created!");
     return jerry;
 }
 void destroyJerry(Jerry* jerry)
@@ -158,6 +163,7 @@ void destroyJerry(Jerry* jerry)
     {
         destroyPhysicalCharacteristics(&jerry->physicalCharacteristics[i]);
     }
+    printf("Jerry was destroyed");
     free(jerry->physicalCharacteristics);
     free(jerry);
 }
@@ -169,7 +175,58 @@ bool ifHasPhysicalCharacteristics(Jerry* jerry, PhysicalCharacteristics* pc)
     }
     for(int i = 0; i < jerry->numberOfCharacteristics; i++)
     {
-        
+        if(strcmp(jerry->physicalCharacteristics[i].name, pc->name) == 0) //
+        {
+            printf("Jerry has that physical characteristic");
+            return true;
+        }
+    }
+    printf("Jerry doesn't has that physical characteristic");
+    return false;
+}
+status addPhysicalCharacteristics(Jerry* jerry, PhysicalCharacteristics* pc) //
+{
+    if(jerry == NULL || pc == NULL)
+    {
+        return failure;
+    }
+    for(int i = 0; i < jerry->numberOfCharacteristics; i ++)
+    {
+        if (strcmp(jerry->physicalCharacteristics[i].name, pc->name) == 0)
+        {
+            printf("Jerry already has that physical characteristic");
+            return failure;
+        }
     }
 
+
+
+}
+status removePhysicalCharacteristics(Jerry* jerry, char* name)
+{
+    if(jerry == NULL || name == NULL)
+    {
+        return failure;
+    }
+
+}
+status printJerry(Jerry* jerry)
+{
+    if(jerry == NULL)
+    {
+        return failure;
+    }
+    printf("Jerry, ID - %s : \n", jerry->id);
+    printf("Happiness level : %d \n", jerry->happiness);
+    printf("Origin : %s \n", jerry->origin);
+    printPlant(jerry->origin->plants);
+    if(jerry->numberOfCharacteristics > 0)
+    {
+        printf("Jerry's physical Characteristics available : \n");
+        for(int i = 0; i < jerry->numberOfCharacteristics; i++)
+        {
+            printf(" %s : %.2f \n", jerry->physicalCharacteristics[i].name, jerry->physicalCharacteristics[i].value);
+        }
+    }
+    return success;
 }
