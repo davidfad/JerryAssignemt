@@ -10,7 +10,7 @@ Plant* createPlant(char* name, double x, double y, double z)
 {
     if(name == NULL)
     {
-        return NULL;       
+        return NULL;
     }
 
     Plant* plant = (Plant*)malloc(sizeof(Plant));
@@ -51,7 +51,7 @@ status printPlant(Plant* plant)
         return failure;
     }
 
-    printf("Planet : %s (%.2d,%.2d,%.2d) \n",plant->name, plant->x, plant->y, plant->z);
+    printf("Planet : %s (%.2f,%.2f,%.2f) \n",plant->name, plant->x, plant->y, plant->z);
     return success;
 }
 
@@ -63,7 +63,7 @@ Origin* createOrigin(char* dimansion, Plant* plant)
     {
         return NULL;
     }
-    Origin* origin = (Origin*)malloc(sizeof(origin));
+    Origin* origin = (Origin*)malloc(sizeof(Origin));
     if(origin == NULL)
     {
         return NULL;
@@ -75,7 +75,7 @@ Origin* createOrigin(char* dimansion, Plant* plant)
         return NULL;
     }
     
-    origin->dimansion = dimansion;
+    strcpy(origin->dimansion, dimansion);
     origin->plants = plant;
 
     return origin;
@@ -98,19 +98,19 @@ PhysicalCharacteristics* createPhysicalCharacteristics(char* name, double value)
     {
         return NULL;
     }
-    PhysicalCharacteristics* pc = (PhysicalCharacteristics*)malloc(sizeof(pc));
+    PhysicalCharacteristics* pc = (PhysicalCharacteristics*)malloc(sizeof(PhysicalCharacteristics));
     if(pc == NULL)
     {
         return NULL;
     }
     pc->name = (char*)malloc(strlen(name)+1);
-    if(pc->name)
+    if(pc->name == NULL)
     {
         free(pc);
         return NULL;
     }
 
-    pc->name = name;
+    strcpy(pc->name, name);
     pc->value = value;
 
     return pc;
@@ -130,11 +130,11 @@ void destroyPhysicalCharacteristics(PhysicalCharacteristics* physicalCharacteris
 
 Jerry* createJerry(char* id, int happiness, Origin* origin)
 {
-    if(id || origin == NULL)
+    if(id == NULL || origin == NULL)
     {
         return NULL;
     }
-    Jerry* jerry = (Jerry*)malloc(sizeof(jerry));
+    Jerry* jerry = (Jerry*)malloc(sizeof(Jerry));
     if(jerry == NULL)
     {
         return NULL;
@@ -225,7 +225,7 @@ status printJerry(Jerry* jerry)
     printPlant(jerry->origin->plants);
     if(jerry->numberOfCharacteristics > 0)
     {
-        printf("Jerry's physical Characteristics available : \n");
+        printf("Jerry's physical Characteristics available");
         for(int i = 0; i < jerry->numberOfCharacteristics; i++)
         {
             printf(" %s : %.2f \n", jerry->physicalCharacteristics[i].name, jerry->physicalCharacteristics[i].value);
